@@ -1,0 +1,26 @@
+services:
+  pet-shop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pet-shop
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL:-postgresql://petshop:petshop_pass@pet-shop-db:5432/pet_shop}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=7d
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+    networks:
+      - pet-shop-net
+      - homelab-network
+
+networks:
+  pet-shop-net:
+    external: true
+    name: pet-shop-net
+  homelab-network:
+    external: true
+    name: homelab-network
