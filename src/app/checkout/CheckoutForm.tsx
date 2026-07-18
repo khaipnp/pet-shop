@@ -123,44 +123,84 @@ export default function CheckoutForm({
         </h2>
 
         <div className="space-y-4">
-          <Input
-            label="Họ và tên"
-            name="fullName"
-            placeholder="Nguyễn Văn A"
-            value={form.fullName}
-            onChange={handleChange}
-            required
-          />
-          <Input
-            label="Số điện thoại"
-            name="phone"
-            type="tel"
-            placeholder="0912345678"
-            value={form.phone}
-            onChange={handleChange}
-            required
-          />
-          <Input
-            label="Địa chỉ"
-            name="address"
-            placeholder="Số nhà, tên đường, phường/xã"
-            value={form.address}
-            onChange={handleChange}
-            required
-          />
-          <Input
-            label="Thành phố"
-            name="city"
-            placeholder="Hồ Chí Minh"
-            value={form.city}
-            onChange={handleChange}
-            required
-          />
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-gray-700 font-display">
+            <label
+              htmlFor="checkout-full-name"
+              className="text-sm font-medium text-gray-700 font-display"
+            >
+              Họ và tên
+            </label>
+            <Input
+              id="checkout-full-name"
+              name="fullName"
+              autoComplete="name"
+              placeholder="Nguyễn Văn A"
+              value={form.fullName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="checkout-phone"
+              className="text-sm font-medium text-gray-700 font-display"
+            >
+              Số điện thoại
+            </label>
+            <Input
+              id="checkout-phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="0912345678"
+              value={form.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="checkout-address"
+              className="text-sm font-medium text-gray-700 font-display"
+            >
+              Địa chỉ
+            </label>
+            <Input
+              id="checkout-address"
+              name="address"
+              autoComplete="street-address"
+              placeholder="Số nhà, tên đường, phường/xã"
+              value={form.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="checkout-city"
+              className="text-sm font-medium text-gray-700 font-display"
+            >
+              Thành phố
+            </label>
+            <Input
+              id="checkout-city"
+              name="city"
+              autoComplete="address-level2"
+              placeholder="Hồ Chí Minh"
+              value={form.city}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="checkout-note"
+              className="text-sm font-medium text-gray-700 font-display"
+            >
               Ghi chú (không bắt buộc)
             </label>
             <textarea
+              id="checkout-note"
               name="note"
               placeholder="Ghi chú cho đơn hàng..."
               value={form.note}
@@ -252,7 +292,6 @@ export default function CheckoutForm({
         </p>
         <Button
           type="submit"
-          variant="primary"
           size="lg"
           disabled={loading}
           className="w-full sm:w-auto"

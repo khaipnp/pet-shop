@@ -81,41 +81,77 @@ export default function RegisterPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              label="Họ và tên"
-              name="name"
-              placeholder="Nguyễn Văn A"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              placeholder="email@example.com"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              label="Mật khẩu"
-              name="password"
-              type="password"
-              placeholder="Ít nhất 6 ký tự"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              label="Xác nhận mật khẩu"
-              name="confirmPassword"
-              type="password"
-              placeholder="Nhập lại mật khẩu"
-              value={form.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="register-name"
+                className="text-sm font-medium text-gray-700 font-display"
+              >
+                Họ và tên
+              </label>
+              <Input
+                id="register-name"
+                name="name"
+                autoComplete="name"
+                placeholder="Nguyễn Văn A"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="register-email"
+                className="text-sm font-medium text-gray-700 font-display"
+              >
+                Email
+              </label>
+              <Input
+                id="register-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="email@example.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="register-password"
+                className="text-sm font-medium text-gray-700 font-display"
+              >
+                Mật khẩu
+              </label>
+              <Input
+                id="register-password"
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                placeholder="Ít nhất 6 ký tự"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="register-confirm-password"
+                className="text-sm font-medium text-gray-700 font-display"
+              >
+                Xác nhận mật khẩu
+              </label>
+              <Input
+                id="register-confirm-password"
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                placeholder="Nhập lại mật khẩu"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
             {error && (
               <p className="text-sm font-medium text-red-500">❌ {error}</p>
@@ -123,7 +159,6 @@ export default function RegisterPage() {
 
             <Button
               type="submit"
-              variant="primary"
               size="lg"
               disabled={loading}
               className="w-full"

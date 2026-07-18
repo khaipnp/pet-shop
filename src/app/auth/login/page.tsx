@@ -65,24 +65,42 @@ function LoginForm() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              placeholder="email@example.com"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-            <Input
-              label="Mật khẩu"
-              name="password"
-              type="password"
-              placeholder="••••••••"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="login-email"
+                className="text-sm font-medium text-gray-700 font-display"
+              >
+                Email
+              </label>
+              <Input
+                id="login-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="email@example.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="login-password"
+                className="text-sm font-medium text-gray-700 font-display"
+              >
+                Mật khẩu
+              </label>
+              <Input
+                id="login-password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
             {error && (
               <p className="text-sm font-medium text-red-500">❌ {error}</p>
@@ -90,7 +108,6 @@ function LoginForm() {
 
             <Button
               type="submit"
-              variant="primary"
               size="lg"
               disabled={loading}
               className="w-full"

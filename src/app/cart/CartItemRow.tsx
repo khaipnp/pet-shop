@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { formatPrice } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 
 interface CartItemData {
   id: string

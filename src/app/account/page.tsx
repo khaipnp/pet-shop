@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { verifyToken, getAuthUser } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { formatPrice, formatDate } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import LogoutButton from './LogoutButton'
 
@@ -121,8 +121,11 @@ export default async function AccountPage({
                 <p className="mt-1 text-sm text-gray-400">
                   Bắt đầu mua sắm để xem lịch sử đơn hàng tại đây
                 </p>
-                <Link href="/shop" className="mt-4 inline-block">
-                  <Button variant="primary">🛍️ Mua sắm ngay</Button>
+                <Link
+                  href="/shop"
+                  className={buttonVariants({ className: 'mt-4' })}
+                >
+                  🛍️ Mua sắm ngay
                 </Link>
               </CardContent>
             </Card>

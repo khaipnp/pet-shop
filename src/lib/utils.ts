@@ -1,3 +1,10 @@
+import { clsx, type ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 // ─── Slug ──────────────────────────────────────────────
 
 /**
@@ -8,7 +15,7 @@ export function slugify(text: string): string {
   return text
     .toString()
     .normalize('NFD') // Decompose accented characters
-    .replace(/[\u0300-\u036f]/g, '') // Remove combining diacritical marks
+    .replace(/[̀-ͯ]/g, '') // Remove combining diacritical marks
     .replace(/[đĐ]/g, (m) => (m === 'đ' ? 'd' : 'D')) // Handle Vietnamese đ
     .toLowerCase()
     .trim()

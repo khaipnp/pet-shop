@@ -208,9 +208,9 @@ export default async function ShopPage({
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {products.map((product) => (
                 <Link key={product.id} href={`/shop/${product.slug}`}>
-                  <Card className="group h-full cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg">
-                    <div className="aspect-square w-full rounded-t-2xl bg-gradient-to-br from-primary/20 to-accent/20" />
-                    <CardContent>
+                  <Card className="group h-full cursor-pointer gap-0 py-0 transition-all hover:-translate-y-1 hover:shadow-lg">
+                    <div className="aspect-square w-full bg-gradient-to-br from-primary/20 to-accent/20" />
+                    <CardContent className="py-5">
                       <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary-dark">
                         {product.category?.name ?? 'Đa năng'}
                       </p>

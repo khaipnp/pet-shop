@@ -2,8 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import prisma from '@/lib/prisma'
 import { formatPrice } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import AddToCartButton from './AddToCartButton'
 
 // ─── Server Component ──────────────────────────────────
@@ -131,15 +130,15 @@ export default async function ProductDetailPage({
           </div>
 
           {/* Description */}
-          <Card className="bg-muted/50">
-            <div className="p-4">
+          <Card className="gap-0 bg-muted/50 py-0">
+            <CardContent className="py-4">
               <h3 className="mb-2 font-display text-sm font-bold uppercase tracking-wider text-gray-600">
                 Mô tả sản phẩm
               </h3>
               <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-600">
                 {product.description}
               </p>
-            </div>
+            </CardContent>
           </Card>
 
           {/* Pet type tag */}

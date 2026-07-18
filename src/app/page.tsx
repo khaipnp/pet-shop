@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardTitle } from '@/components/ui/card'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { formatPrice } from '@/lib/utils'
 import prisma from '@/lib/prisma'
@@ -48,15 +48,14 @@ export default async function HomePage() {
               đồ chơi vui nhộn đến phụ kiện đáng yêu. Yêu thương qua từng sản phẩm!
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/shop">
-                <Button size="lg" variant="primary">
-                  🛒 Shop Now
-                </Button>
+              <Link href="/shop" className={buttonVariants({ size: 'lg' })}>
+                🛒 Shop Now
               </Link>
-              <Link href="#categories">
-                <Button size="lg" variant="outline">
-                  📖 Learn More
-                </Button>
+              <Link
+                href="#categories"
+                className={buttonVariants({ variant: 'outline', size: 'lg' })}
+              >
+                📖 Learn More
               </Link>
             </div>
           </div>
@@ -86,9 +85,9 @@ export default async function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((product) => (
               <Link key={product.id} href={`/shop/${product.slug}`}>
-                <Card className="group h-full cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg">
-                  <div className="aspect-square w-full rounded-t-2xl bg-gradient-to-br from-primary/20 to-accent/20" />
-                  <CardContent>
+                <Card className="group h-full cursor-pointer gap-0 py-0 transition-all hover:-translate-y-1 hover:shadow-lg">
+                  <div className="aspect-square w-full bg-gradient-to-br from-primary/20 to-accent/20" />
+                  <CardContent className="py-5">
                     <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary-dark">
                       {product.category?.name ?? 'Đa năng'}
                     </p>
@@ -184,13 +183,18 @@ export default async function HomePage() {
             Đăng ký để nhận ưu đãi đặc biệt và sản phẩm mới mỗi tuần!
           </p>
           <form className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email
+            </label>
             <Input
+              id="newsletter-email"
               type="email"
+              autoComplete="email"
               placeholder="Nhập email của bạn..."
               className="flex-1"
               required
             />
-            <Button type="submit" variant="primary" size="lg">
+            <Button type="submit" size="lg">
               Đăng ký
             </Button>
           </form>

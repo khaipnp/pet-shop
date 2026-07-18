@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { verifyToken } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { formatPrice } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import CartItemRow from './CartItemRow'
 
 // ─── Server Component ──────────────────────────────────
@@ -107,10 +107,11 @@ export default async function CartPage() {
               </div>
             </div>
 
-            <Link href="/checkout">
-              <Button variant="primary" size="lg" className="w-full">
-                🛍️ Thanh toán
-              </Button>
+            <Link
+              href="/checkout"
+              className={buttonVariants({ size: 'lg', className: 'w-full' })}
+            >
+              🛍️ Thanh toán
             </Link>
 
             <div className="mt-3 text-center">
@@ -143,16 +144,15 @@ function EmptyCart({ loggedIn }: { loggedIn: boolean }) {
           : 'Vui lòng đăng nhập để xem giỏ hàng của bạn.'}
       </p>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <Link href="/shop">
-          <Button variant="primary" size="lg">
-            🛍️ Mua sắm ngay
-          </Button>
+        <Link href="/shop" className={buttonVariants({ size: 'lg' })}>
+          🛍️ Mua sắm ngay
         </Link>
         {!loggedIn && (
-          <Link href="/auth/login">
-            <Button variant="outline" size="lg">
-              🔑 Đăng nhập
-            </Button>
+          <Link
+            href="/auth/login"
+            className={buttonVariants({ variant: 'outline', size: 'lg' })}
+          >
+            🔑 Đăng nhập
           </Link>
         )}
       </div>

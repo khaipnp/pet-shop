@@ -70,7 +70,6 @@ export default function AddToCartButton({
       </div>
 
       <Button
-        variant="primary"
         size="lg"
         disabled={loading || stock === 0}
         onClick={handleAdd}
