@@ -1,59 +1,110 @@
-import Link from 'next/link'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { formatPrice } from '@/lib/utils'
-import prisma from '@/lib/prisma'
+import Link from "next/link";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import prisma from "@/lib/prisma";
+import { formatPrice } from "@/lib/utils";
 
 // ─── Data ──────────────────────────────────────────────
 
 const CATEGORIES = [
-  { name: 'Thức ăn cho chó', slug: 'thuc-an-cho-cho', icon: '🐕', desc: 'Thức ăn dinh dưỡng cho chó' },
-  { name: 'Thức ăn cho mèo', slug: 'thuc-an-cho-meo', icon: '🐈', desc: 'Thức ăn ngon cho mèo yêu' },
-  { name: 'Đồ chơi thú cưng', slug: 'do-choi', icon: '🎾', desc: 'Đồ chơi vui nhộn mỗi ngày' },
-  { name: 'Phụ kiện & Vòng cổ', slug: 'phu-kien', icon: '🦴', desc: 'Phụ kiện thời trang cho pet' },
-  { name: 'Vệ sinh & Chăm sóc', slug: 've-sinh', icon: '🧴', desc: 'Dụng cụ vệ sinh thú cưng' },
-  { name: 'Quần áo thú cưng', slug: 'quan-ao', icon: '👕', desc: 'Thời trang cho chó mèo' },
-  { name: 'Sữa tắm & Dưỡng lông', slug: 'sua-tam-duong-long', icon: '🧼', desc: 'Chăm sóc lông mềm mượt' },
-]
+  {
+    name: "Thức ăn cho chó",
+    slug: "thuc-an-cho-cho",
+    icon: "🐕",
+    desc: "Thức ăn dinh dưỡng cho chó",
+  },
+  {
+    name: "Thức ăn cho mèo",
+    slug: "thuc-an-cho-meo",
+    icon: "🐈",
+    desc: "Thức ăn ngon cho mèo yêu",
+  },
+  {
+    name: "Đồ chơi thú cưng",
+    slug: "do-choi",
+    icon: "🎾",
+    desc: "Đồ chơi vui nhộn mỗi ngày",
+  },
+  {
+    name: "Phụ kiện & Vòng cổ",
+    slug: "phu-kien",
+    icon: "🦴",
+    desc: "Phụ kiện thời trang cho pet",
+  },
+  {
+    name: "Vệ sinh & Chăm sóc",
+    slug: "ve-sinh",
+    icon: "🧴",
+    desc: "Dụng cụ vệ sinh thú cưng",
+  },
+  {
+    name: "Quần áo thú cưng",
+    slug: "quan-ao",
+    icon: "👕",
+    desc: "Thời trang cho chó mèo",
+  },
+  {
+    name: "Sữa tắm & Dưỡng lông",
+    slug: "sua-tam-duong-long",
+    icon: "🧼",
+    desc: "Chăm sóc lông mềm mượt",
+  },
+];
 
 const REVIEWS = [
-  { name: 'Minh Anh', avatar: 'MA', rating: 5, text: 'Sản phẩm chất lượng, đóng gói cẩn thận. Bé mèo nhà mình rất thích!' },
-  { name: 'Hoàng Nam', avatar: 'HN', rating: 5, text: 'Giao hàng nhanh, giá tốt. Sẽ ủng hộ shop dài dài.' },
-  { name: 'Thu Trang', avatar: 'TT', rating: 4, text: 'Lần đầu mua, chất lượng vượt mong đợi. Bé cún rất thích món đồ chơi.' },
-]
+  {
+    name: "Minh Anh",
+    avatar: "MA",
+    rating: 5,
+    text: "Sản phẩm chất lượng, đóng gói cẩn thận. Bé mèo nhà mình rất thích!",
+  },
+  {
+    name: "Hoàng Nam",
+    avatar: "HN",
+    rating: 5,
+    text: "Giao hàng nhanh, giá tốt. Sẽ ủng hộ shop dài dài.",
+  },
+  {
+    name: "Thu Trang",
+    avatar: "TT",
+    rating: 4,
+    text: "Lần đầu mua, chất lượng vượt mong đợi. Bé cún rất thích món đồ chơi.",
+  },
+];
 
 // ─── Server Component ──────────────────────────────────
 
 export default async function HomePage() {
   const featuredProducts = await prisma.product.findMany({
-    where: { featured: true, status: 'ACTIVE' },
+    where: { featured: true, status: "ACTIVE" },
     take: 4,
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
     include: { category: { select: { name: true, slug: true } } },
-  })
+  });
 
   return (
     <>
       {/* ── Hero Section ─────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20 px-4 py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-linear-to-br from-primary/20 via-secondary/20 to-accent/20 px-4 py-20 sm:py-28">
         <div className="container-page relative z-10">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Pawsitively Perfect{' '}
+              Pawsitively Perfect{" "}
               <span className="text-primary-dark">Pet Supplies</span>
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl">
               Tất cả những gì bạn cần cho người bạn nhỏ — từ thức ăn dinh dưỡng,
-              đồ chơi vui nhộn đến phụ kiện đáng yêu. Yêu thương qua từng sản phẩm!
+              đồ chơi vui nhộn đến phụ kiện đáng yêu. Yêu thương qua từng sản
+              phẩm!
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/shop" className={buttonVariants({ size: 'lg' })}>
+              <Link href="/shop" className={buttonVariants({ size: "lg" })}>
                 🛒 Shop Now
               </Link>
               <Link
                 href="#categories"
-                className={buttonVariants({ variant: 'outline', size: 'lg' })}
+                className={buttonVariants({ variant: "outline", size: "lg" })}
               >
                 📖 Learn More
               </Link>
@@ -89,7 +140,7 @@ export default async function HomePage() {
                   <div className="aspect-square w-full bg-gradient-to-br from-primary/20 to-accent/20" />
                   <CardContent className="py-5">
                     <p className="mb-1 text-xs font-medium uppercase tracking-wider text-primary-dark">
-                      {product.category?.name ?? 'Đa năng'}
+                      {product.category?.name ?? "Đa năng"}
                     </p>
                     <CardTitle className="line-clamp-2 text-base">
                       {product.name}
@@ -98,11 +149,12 @@ export default async function HomePage() {
                       <span className="font-display text-lg font-bold text-primary-dark">
                         {formatPrice(product.price)}
                       </span>
-                      {product.compareAt && Number(product.compareAt) > Number(product.price) && (
-                        <span className="text-sm text-gray-400 line-through">
-                          {formatPrice(product.compareAt)}
-                        </span>
-                      )}
+                      {product.compareAt &&
+                        Number(product.compareAt) > Number(product.price) && (
+                          <span className="text-sm text-gray-400 line-through">
+                            {formatPrice(product.compareAt)}
+                          </span>
+                        )}
                     </div>
                   </CardContent>
                 </Card>
@@ -157,7 +209,7 @@ export default async function HomePage() {
                 <div className="mb-2 flex justify-center gap-0.5">
                   {Array.from({ length: 5 }).map((_, j) => (
                     <span key={j} className="text-sm">
-                      {j < r.rating ? '⭐' : '☆'}
+                      {j < r.rating ? "⭐" : "☆"}
                     </span>
                   ))}
                 </div>
@@ -201,5 +253,5 @@ export default async function HomePage() {
         </div>
       </section>
     </>
-  )
+  );
 }

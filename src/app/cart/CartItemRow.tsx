@@ -25,10 +25,10 @@ export default function CartItemRow({ item }: { item: CartItemData }) {
     if (newQty < 1 || newQty > item.stock) return
     setLoading(true)
     try {
-      const res = await fetch(`/api/cart/items/${item.id}`, {
+      const res = await fetch('/api/cart', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ quantity: newQty }),
+        body: JSON.stringify({ itemId: item.id, quantity: newQty }),
       })
       if (!res.ok) {
         const data = await res.json()
@@ -46,7 +46,7 @@ export default function CartItemRow({ item }: { item: CartItemData }) {
   const removeItem = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/cart/items/${item.id}`, {
+      const res = await fetch(`/api/cart?itemId=${encodeURIComponent(item.id)}`, {
         method: 'DELETE',
       })
       if (!res.ok) throw new Error('Failed to remove item')
